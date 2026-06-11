@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.merchantanalysis.mapper.MerchantOperatingDataMapper">
+
+    <resultMap id="BaseResultMap" type="com.merchantanalysis.entity.MerchantOperatingData">
+        <id column="id" property="id"/>
+        <result column="merchant_id" property="merchantId"/>
+        <result column="platform" property="platform"/>
+        <result column="data_date" property="dataDate"/>
+        <result column="gmv" property="gmv"/>
+        <result column="sales_amount" property="salesAmount"/>
+        <result column="orders_count" property="ordersCount"/>
+        <result column="avg_order_price" property="avgOrderPrice"/>
+        <result column="conversion_rate" property="conversionRate"/>
+        <result column="traffic_count" property="trafficCount"/>
+        <result column="fans_growth" property="fansGrowth"/>
+        <result column="engagement_rate" property="engagementRate"/>
+        <result column="live_sales" property="liveSales"/>
+        <result column="ad_investment" property="adInvestment"/>
+        <result column="roi" property="roi"/>
+        <result column="hot_products_rank" property="hotProductsRank"/>
+        <result column="category_rank" property="categoryRank"/>
+        <result column="market_share" property="marketShare"/>
+        <result column="raw_data" property="rawData"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="selectByMerchantId" resultMap="BaseResultMap">
+        SELECT * FROM merchant_operating_data WHERE merchant_id = #{merchantId} AND deleted = 0 ORDER BY data_date DESC
+    </select>
+
+    <select id="selectByMerchantIdAndDateRange" resultMap="BaseResultMap">
+        SELECT * FROM merchant_operating_data
+        WHERE merchant_id = #{merchantId}
+        AND data_date BETWEEN #{startDate} AND #{endDate}
+        AND deleted = 0
+        ORDER BY data_date DESC
+    </select>
+
+</mapper>

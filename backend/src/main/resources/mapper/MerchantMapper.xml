@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.merchantanalysis.mapper.MerchantMapper">
+
+    <resultMap id="BaseResultMap" type="com.merchantanalysis.entity.Merchant">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="website" property="website"/>
+        <result column="is_listed" property="isListed"/>
+        <result column="listing_exchange" property="listingExchange"/>
+        <result column="stock_code" property="stockCode"/>
+        <result column="industry_id" property="industryId"/>
+        <result column="company_scale" property="companyScale"/>
+        <result column="registered_capital" property="registeredCapital"/>
+        <result column="established_date" property="establishedDate"/>
+        <result column="business_description" property="businessDescription"/>
+        <result column="advantages" property="advantages"/>
+        <result column="products_info" property="productsInfo"/>
+        <result column="revenue" property="revenue"/>
+        <result column="employee_count" property="employeeCount"/>
+        <result column="headquarters" property="headquarters"/>
+        <result column="source_url" property="sourceUrl"/>
+        <result column="data_status" property="dataStatus"/>
+        <result column="last_fetch_time" property="lastFetchTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="selectPageList" resultMap="BaseResultMap">
+        SELECT * FROM merchant WHERE deleted = 0
+        <if test="req.name != null and req.name != ''">
+            AND name LIKE CONCAT('%', #{req.name}, '%')
+        </if>
+        <if test="req.industryId != null">
+            AND industry_id = #{req.industryId}
+        </if>
+        <if test="req.isListed != null">
+            AND is_listed = #{req.isListed}
+        </if>
+        <if test="req.dataStatus != null">
+            AND data_status = #{req.dataStatus}
+        </if>
+        ORDER BY create_time DESC
+    </select>
+
+</mapper>

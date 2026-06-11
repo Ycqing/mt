@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.merchantanalysis.mapper.MerchantReviewMapper">
+
+    <resultMap id="BaseResultMap" type="com.merchantanalysis.entity.MerchantReview">
+        <id column="id" property="id"/>
+        <result column="merchant_id" property="merchantId"/>
+        <result column="product_id" property="productId"/>
+        <result column="platform" property="platform"/>
+        <result column="reviewer_nickname" property="reviewerNickname"/>
+        <result column="rating" property="rating"/>
+        <result column="content" property="content"/>
+        <result column="like_count" property="likeCount"/>
+        <result column="reply_count" property="replyCount"/>
+        <result column="media_urls" property="mediaUrls"/>
+        <result column="sentiment" property="sentiment"/>
+        <result column="keywords" property="keywords"/>
+        <result column="review_date" property="reviewDate"/>
+        <result column="source_url" property="sourceUrl"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="selectByMerchantId" resultMap="BaseResultMap">
+        SELECT * FROM merchant_review WHERE merchant_id = #{merchantId} AND deleted = 0 ORDER BY review_date DESC
+    </select>
+
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.merchantanalysis.mapper.MerchantFinancialMapper">
+
+    <resultMap id="BaseResultMap" type="com.merchantanalysis.entity.MerchantFinancial">
+        <id column="id" property="id"/>
+        <result column="merchant_id" property="merchantId"/>
+        <result column="report_year" property="reportYear"/>
+        <result column="report_period" property="reportPeriod"/>
+        <result column="report_date" property="reportDate"/>
+        <result column="revenue" property="revenue"/>
+        <result column="net_profit" property="netProfit"/>
+        <result column="gross_margin" property="grossMargin"/>
+        <result column="operating_margin" property="operatingMargin"/>
+        <result column="total_assets" property="totalAssets"/>
+        <result column="total_liabilities" property="totalLiabilities"/>
+        <result column="roe" property="roe"/>
+        <result column="eps" property="eps"/>
+        <result column="source" property="source"/>
+        <result column="source_url" property="sourceUrl"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="selectByMerchantId" resultMap="BaseResultMap">
+        SELECT * FROM merchant_financial WHERE merchant_id = #{merchantId} AND deleted = 0 ORDER BY report_year DESC
+    </select>
+
+    <select id="selectByMerchantIdAndYear" resultMap="BaseResultMap">
+        SELECT * FROM merchant_financial WHERE merchant_id = #{merchantId} AND report_year = #{year} AND deleted = 0
+    </select>
+
+</mapper>
